@@ -29,7 +29,7 @@ Run Terra Station with the following commands:
 git clone https://github.com/terra-money/station.git
 cd station
 npm i
-npm run start
+npm start
 ```
 
 Runs the app in development mode.

@@ -13,9 +13,10 @@ import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline"
 import { isDenom, isDenomIBC, readDenom } from "@terra.kitchen/utils"
 import { Coin, Coins, LCDClient } from "@terra-money/terra.js"
 import { CreateTxOptions, Fee } from "@terra-money/terra.js"
-import { ConnectType, UserDenied } from "@terra-money/wallet-types"
-import { CreateTxFailed, TxFailed } from "@terra-money/wallet-types"
-import { useWallet, useConnectedWallet } from "@terra-money/use-wallet"
+import {
+  ConnectType, UserDenied, CreateTxFailed,
+  TxFailed, useWallet, useConnectedWallet
+} from "@terra-money/wallet-provider"
 
 import { Contents } from "types/components"
 import { has } from "utils/num"
