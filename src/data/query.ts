@@ -1,10 +1,8 @@
 import { useChainID } from "auth/hooks/useNetwork"
 import { LAZY_LIMIT } from "config/constants"
 
-export const useIsClassic = () => {
-  const networkName = useChainID()
-  return networkName === "columbus-5" // TODO
-}
+export const useIsClassic = () => 
+  ['columbus-5', 'rebel-1', 'rebel-2'].includes(useChainID())
 
 /* refetch */
 export const RefetchOptions = {

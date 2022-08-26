@@ -11,7 +11,7 @@ import NetworkName from "./sections/NetworkName"
 
 /* sidebar */
 import Nav from "./sections/Nav"
-import Aside from "./sections/Aside"
+// import Aside from "./sections/Aside"
 
 /* header */
 import IsClassicNetwork from "./sections/IsClassicNetwork"
@@ -39,7 +39,7 @@ const App = () => {
 
       <Sidebar>
         <Nav />
-        <Aside />
+        {/* <Aside /> */}
       </Sidebar>
 
       <Header>
