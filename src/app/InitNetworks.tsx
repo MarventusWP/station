@@ -15,7 +15,7 @@ const InitNetworks = ({ children }: PropsWithChildren<{}>) => {
   useEffect(() => {
     const fetchChains = async () => {
       const { data: chains } = await axios.get<TerraNetworks>("/chains.json", {
-        baseURL: 'https://rebelnode.net',
+        baseURL: 'https://rebelnode.dev',
       })
 
       const networks = {
