@@ -127,6 +127,7 @@ const StakeForm = (props: Props) => {
     estimationTxValues,
     createTx,
     onChangeMax,
+    preventTax: true,
     onSuccess: {
       label: findMoniker(destination),
       path: `/validator/${destination}`,

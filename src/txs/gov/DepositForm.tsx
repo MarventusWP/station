@@ -69,6 +69,7 @@ const DepositForm = () => {
     estimationTxValues,
     createTx,
     onChangeMax,
+    preventTax: true,
     onSuccess: {
       label: [t("Proposal"), id].join(" "),
       path: `/proposal/${id}`,
