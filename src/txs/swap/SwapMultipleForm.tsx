@@ -4,7 +4,6 @@ import { useQuery } from "react-query"
 import { useForm } from "react-hook-form"
 import BigNumber from "bignumber.js"
 import { flatten, fromPairs } from "ramda"
-//import { Coin, Coins } from "@terra-money/terra.js"
 
 /* helpers */
 import { has } from "utils/num"
@@ -30,6 +29,7 @@ import useSwapUtils, { SwapMode } from "./useSwapUtils"
 import { useSwap } from "./SwapContext"
 import { useMultipleSwap } from "./MultipleSwapContext"
 import styles from "./SwapMultipleForm.module.scss"
+import { CoinInput, toInput } from "txs/utils"
 
 interface TxValues {
   askAsset: CoinDenom
@@ -151,6 +151,13 @@ const SwapMultipleForm = () => {
   /* fee */
   const estimationTxValues = useMemo(() => ({ askAsset }), [askAsset])
 
+  const coins = offers.map(({ offerAsset, amount, tax }) => {
+    return {
+      input: toInput(amount),
+      denom: offerAsset,
+      preventTax: !tax,
+    } as CoinInput
+  })
   const excludeGasDenom = useCallback(
     (denom: string) => !!state[denom],
     [state]
@@ -160,7 +167,8 @@ const SwapMultipleForm = () => {
     initialGasDenom,
     estimationTxValues,
     createTx,
-    coins: offers,
+    coins,
+    isTaxable: true,
     excludeGasDenom,
     onSuccess: { label: t("Wallet"), path: "/wallet" },
   }

@@ -112,6 +112,7 @@ function Tx<TxValues>(props: Props<TxValues>) {
         taxParams
       )
     : undefined
+  console.log(taxes)
   const shouldTax = isTaxable && getShouldTax(token) && isClassic
   const { data: rate = "0", ...taxRateState } = useTaxRate(!shouldTax)
   const { data: cap = "0", ...taxCapState } = useTaxCap(token)
