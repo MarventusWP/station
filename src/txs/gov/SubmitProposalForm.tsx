@@ -181,7 +181,6 @@ const SubmitProposalForm = ({ communityPool, minDeposit }: Props) => {
     estimationTxValues,
     createTx,
     onChangeMax,
-    preventTax: true,
     onSuccess: { label: t("Gov"), path: "/gov" },
     queryKeys: [queryKey.gov.proposals],
   }

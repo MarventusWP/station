@@ -4,7 +4,7 @@ import { useQuery } from "react-query"
 import { useForm } from "react-hook-form"
 import BigNumber from "bignumber.js"
 import { flatten, fromPairs } from "ramda"
-import { Coin, Coins } from "@terra-money/terra.js"
+//import { Coin, Coins } from "@terra-money/terra.js"
 
 /* helpers */
 import { has } from "utils/num"
@@ -151,15 +151,6 @@ const SwapMultipleForm = () => {
   /* fee */
   const estimationTxValues = useMemo(() => ({ askAsset }), [askAsset])
 
-  const taxes = new Coins(
-    offers
-      .filter(({ tax }) => has(tax))
-      .map(({ offerAsset, tax }) => {
-        if (!tax) throw new Error()
-        return new Coin(offerAsset, tax)
-      })
-  )
-
   const excludeGasDenom = useCallback(
     (denom: string) => !!state[denom],
     [state]
@@ -169,7 +160,7 @@ const SwapMultipleForm = () => {
     initialGasDenom,
     estimationTxValues,
     createTx,
-    taxes,
+    coins: offers,
     excludeGasDenom,
     onSuccess: { label: t("Wallet"), path: "/wallet" },
   }
