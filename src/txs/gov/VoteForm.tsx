@@ -63,7 +63,6 @@ const VoteForm = () => {
     initialGasDenom,
     estimationTxValues,
     createTx,
-    preventTax: true,
     onSuccess: {
       label: [t("Proposal"), id].join(" "),
       path: `/proposal/${id}`,
