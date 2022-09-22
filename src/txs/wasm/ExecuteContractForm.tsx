@@ -72,7 +72,6 @@ const ExecuteContractForm = () => {
     estimationTxValues,
     coins,
     createTx,
-    isTaxable: true,
     onSuccess: { label: t("Contract"), path: "/contract" },
     queryKeys: [
       [queryKey.wasm.contractQuery, contract, { tokens: { owner: address } }],

@@ -36,6 +36,7 @@ const DonateAllVestingTokensForm = ({ account }: { account: Account }) => {
   const tx = {
     initialGasDenom,
     estimationTxValues,
+    preventTax: true,
     createTx,
   }
 

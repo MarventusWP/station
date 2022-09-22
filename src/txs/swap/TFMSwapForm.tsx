@@ -210,7 +210,6 @@ const TFMSwapForm = () => {
     initialGasDenom,
     estimationTxValues,
     createTx,
-    isTaxable: true,
     queryKeys: [offerAsset, askAsset]
       .filter((asset) => asset && AccAddress.validate(asset))
       .map((token) => [

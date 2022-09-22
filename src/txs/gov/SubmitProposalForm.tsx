@@ -179,6 +179,7 @@ const SubmitProposalForm = ({ communityPool, minDeposit }: Props) => {
     balance,
     initialGasDenom,
     estimationTxValues,
+    preventTax: true,
     createTx,
     onChangeMax,
     onSuccess: { label: t("Gov"), path: "/gov" },

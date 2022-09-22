@@ -44,6 +44,7 @@ const UpdateAdminContractForm = ({ contract }: { contract: AccAddress }) => {
   const tx = {
     initialGasDenom,
     estimationTxValues,
+    preventTax: true,
     createTx,
     onSuccess: { label: t("Contract"), path: "/contract" },
   }

@@ -125,6 +125,7 @@ const StakeForm = (props: Props) => {
     balance,
     initialGasDenom,
     estimationTxValues,
+    preventTax: true,
     createTx,
     onChangeMax,
     onSuccess: {

@@ -121,7 +121,6 @@ const SendForm = ({ token, decimals, balance }: Props) => {
     initialGasDenom,
     estimationTxValues,
     createTx,
-    isTaxable: true,
     disabled,
     onChangeMax,
     onSuccess: { label: t("Wallet"), path: "/wallet" },

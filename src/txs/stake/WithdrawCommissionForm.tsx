@@ -42,6 +42,7 @@ const WithdrawCommissionForm = () => {
   const tx = {
     initialGasDenom,
     estimationTxValues,
+    preventTax: true,
     createTx,
     onSuccess: { label: t("Stake"), path: "/stake" },
   }

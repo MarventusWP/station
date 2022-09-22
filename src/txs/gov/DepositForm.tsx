@@ -67,6 +67,7 @@ const DepositForm = () => {
     balance,
     initialGasDenom,
     estimationTxValues,
+    preventTax: true,
     createTx,
     onChangeMax,
     onSuccess: {

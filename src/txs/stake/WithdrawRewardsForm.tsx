@@ -110,6 +110,7 @@ const WithdrawRewardsForm = ({ rewards, validators, ...props }: Props) => {
   const tx = {
     initialGasDenom,
     estimationTxValues,
+    preventTax: true,
     createTx,
     onSuccess: { label: t("Stake"), path: "/stake" },
     querykeys: [queryKey.distribution.rewards],

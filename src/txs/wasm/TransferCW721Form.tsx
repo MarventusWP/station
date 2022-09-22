@@ -102,8 +102,8 @@ const TransferCW721Form = ({ contract, id }: Props) => {
   const tx = {
     initialGasDenom,
     estimationTxValues,
+    preventTax: true,
     createTx,
-    isTaxable: false,
     disabled,
     onSuccess: { label: t("NFT"), path: "/nft" },
     queryKeys: [

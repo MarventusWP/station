@@ -62,6 +62,7 @@ const VoteForm = () => {
   const tx = {
     initialGasDenom,
     estimationTxValues,
+    preventTax: true,
     createTx,
     onSuccess: {
       label: [t("Proposal"), id].join(" "),

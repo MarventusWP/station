@@ -49,6 +49,7 @@ const StoreCodeForm = () => {
   const tx = {
     initialGasDenom,
     estimationTxValues,
+    preventTax: true,
     createTx,
     onSuccess: { label: t("Instantiate"), path: "/contract/instantiate" },
   }

@@ -78,6 +78,7 @@ const AnchorEarnForm = ({ tab, deposit, rate }: Props) => {
     balance,
     initialGasDenom,
     estimationTxValues,
+    preventTax: true,
     createTx,
     onChangeMax,
     onSuccess: { label: t("Wallet"), path: "/wallet" },

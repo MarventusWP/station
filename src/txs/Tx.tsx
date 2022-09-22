@@ -58,7 +58,7 @@ interface Props<TxValues> {
   initialGasDenom: CoinDenom
   estimationTxValues?: TxValues
   createTx: (values: TxValues) => CreateTxOptions | undefined
-  isTaxable?: boolean
+  preventTax?: boolean
   excludeGasDenom?: (denom: string) => boolean
 
   /* render */
@@ -82,7 +82,7 @@ interface RenderProps<TxValues> {
 function Tx<TxValues>(props: Props<TxValues>) {
   const { token, decimals, amount, coins, balance } = props
   const { initialGasDenom, estimationTxValues, createTx } = props
-  const { isTaxable, excludeGasDenom } = props
+  const { preventTax, excludeGasDenom } = props
   const { children, onChangeMax } = props
   const { onPost, redirectAfterTx, queryKeys } = props
 
@@ -106,14 +106,13 @@ function Tx<TxValues>(props: Props<TxValues>) {
 
   /* queries: conditional */
   const taxParams = useTaxParams()
-  const taxes = isTaxable
+  const taxes = !preventTax
     ? calcTaxes(
         coins ?? ([{ input: 0, denom: initialGasDenom }] as CoinInput[]),
         taxParams
       )
     : undefined
-  console.log(taxes)
-  const shouldTax = isTaxable && getShouldTax(token) && isClassic
+  const shouldTax = !preventTax && getShouldTax(token) && isClassic
   const { data: rate = "0", ...taxRateState } = useTaxRate(!shouldTax)
   const { data: cap = "0", ...taxCapState } = useTaxCap(token)
   const taxState = combineState(taxRateState, taxCapState)

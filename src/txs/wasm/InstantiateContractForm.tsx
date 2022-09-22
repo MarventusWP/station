@@ -84,7 +84,6 @@ const InstantiateContractForm = () => {
     estimationTxValues,
     coins,
     createTx,
-    isTaxable: true,
     onSuccess: { label: t("Contract"), path: "/contract" },
   }
 
