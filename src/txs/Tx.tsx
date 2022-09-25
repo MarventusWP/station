@@ -504,10 +504,10 @@ function Tx<TxValues>(props: Props<TxValues>) {
 export default Tx
 
 /* utils */
-export const getInitialGasDenom = (bankBalance: Coins) => {
+export const getInitialGasDenom = (bankBalance: Coins, isClassic?: Boolean) => {
   const denom = head(sortCoins(bankBalance))?.denom ?? "uusd"
   const uusd = getAmount(bankBalance, "uusd")
-  return has(uusd) ? "uusd" : denom
+  return has(uusd) && !isClassic ? "uusd" : denom
 }
 
 interface Params {

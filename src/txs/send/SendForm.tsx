@@ -6,7 +6,7 @@ import { AccAddress } from "@terra-money/terra.js"
 import { MsgExecuteContract, MsgSend } from "@terra-money/terra.js"
 import { isDenom, toAmount, truncate } from "@terra.kitchen/utils"
 import { SAMPLE_ADDRESS } from "config/constants"
-import { queryKey } from "data/query"
+import { queryKey, useIsClassic } from "data/query"
 import { useAddress } from "data/wallet"
 import { useBankBalance } from "data/queries/bank"
 import { useTnsAddress } from "data/external/tns"
@@ -34,10 +34,10 @@ const SendForm = ({ token, decimals, balance }: Props) => {
   const { t } = useTranslation()
   const connectedAddress = useAddress()
   const bankBalance = useBankBalance()
+  const isClassic = useIsClassic()
 
   /* tx context */
-  const initialGasDenom = getInitialGasDenom(bankBalance)
-
+  const initialGasDenom = getInitialGasDenom(bankBalance, isClassic)
   /* form */
   const form = useForm<TxValues>({ mode: "onChange" })
   const { register, trigger, watch, setValue, setError, handleSubmit } = form
