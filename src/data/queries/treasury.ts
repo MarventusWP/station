@@ -51,6 +51,5 @@ export const isNativeToken = (token?: Token) =>
   isDenomLuna(token) || isDenomTerra(token)
 
 /* utils */
-export const useShouldTax = (token?: Token, isClassic?: boolean) => {
-  return isClassic && isNativeToken(token)
-}
+export const useShouldTax = (token?: Token, isClassic?: boolean) =>
+  isClassic && isNativeToken(token)
