@@ -219,9 +219,9 @@ const SwapForm = () => {
       return { mode, offerAsset, askAsset, ratio, input, slippageInput: 1 }
     }
   )
-
+    const applyTax = mode !== SwapMode.ONCHAIN
   const token = offerAsset
-  const coins = [{ input, denom: token }] as CoinInput[]
+  const coins = [{ input, denom: token, taxRequired: applyTax }] as CoinInput[]
   const decimals = offerDecimals
   const tx = {
     token,
@@ -232,7 +232,7 @@ const SwapForm = () => {
     initialGasDenom,
     estimationTxValues,
     createTx,
-    preventTax: mode === SwapMode.ONCHAIN,
+    taxRequired: applyTax,
     onPost: () => {
       // add custom token on ask cw20
       if (!(askAsset && AccAddress.validate(askAsset) && askTokenItem)) return

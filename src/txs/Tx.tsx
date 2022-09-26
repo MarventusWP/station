@@ -28,7 +28,7 @@ import { queryKey, combineState, useIsClassic } from "data/query"
 import { useAddress, useNetwork } from "data/wallet"
 import { isBroadcastingState, latestTxState } from "data/queries/tx"
 import { useBankBalance, useIsWalletEmpty } from "data/queries/bank"
-import { getShouldTax, useTaxCap, useTaxRate } from "data/queries/treasury"
+import { useShouldTax, useTaxCap, useTaxRate } from "data/queries/treasury"
 
 import { Pre } from "components/general"
 import { Flex, Grid } from "components/layout"
@@ -58,7 +58,7 @@ interface Props<TxValues> {
   initialGasDenom: CoinDenom
   estimationTxValues?: TxValues
   createTx: (values: TxValues) => CreateTxOptions | undefined
-  preventTax?: boolean
+  taxRequired?: boolean
   excludeGasDenom?: (denom: string) => boolean
 
   /* render */
@@ -82,7 +82,8 @@ interface RenderProps<TxValues> {
 function Tx<TxValues>(props: Props<TxValues>) {
   const { token, decimals, amount, coins, balance } = props
   const { initialGasDenom, estimationTxValues, createTx } = props
-  const { preventTax, excludeGasDenom } = props
+  const { taxRequired = false, excludeGasDenom } = props
+  console.log('taxRequired:', taxRequired)
   const { children, onChangeMax } = props
   const { onPost, redirectAfterTx, queryKeys } = props
 
@@ -105,15 +106,15 @@ function Tx<TxValues>(props: Props<TxValues>) {
   const { gasPrices } = useTx()
 
   /* taxes */
-  const preventTaxProp = (preventTax === undefined || !isClassic || preventTax)
   const taxParams = useTaxParams()
-  const taxes = !preventTaxProp
+  const taxes = taxRequired
     ? calcTaxes(
         coins ?? ([{ input: 0, denom: initialGasDenom }] as CoinInput[]),
         taxParams
       )
     : undefined
-  const shouldTax = !preventTaxProp && getShouldTax(token)
+  const shouldTax = useShouldTax(token) && taxRequired
+  console.log('shouldTax', shouldTax, 'taxRequired:', taxRequired)
   const { data: rate = "0", ...taxRateState } = useTaxRate(!shouldTax)
   const { data: cap = "0", ...taxCapState } = useTaxCap(token)
   const taxState = combineState(taxRateState, taxCapState)
@@ -184,7 +185,7 @@ function Tx<TxValues>(props: Props<TxValues>) {
   const getNativeMax = () => {
     if (!balance) return
     const gasAmount = gasFee.denom === token ? gasFee.amount : "0"
-    return calcMax({ balance, rate: shouldTax ? rate : "0", cap, gasAmount }).max
+    return calcMax({ balance, rate, cap, gasAmount }).max
   }
 
   const max = !gasFee.amount
