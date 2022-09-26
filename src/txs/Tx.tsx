@@ -83,7 +83,7 @@ function Tx<TxValues>(props: Props<TxValues>) {
   const { token, decimals, amount, coins, balance } = props
   const { initialGasDenom, estimationTxValues, createTx } = props
   const { taxRequired = false, excludeGasDenom } = props
-  console.log('taxRequired:', taxRequired)
+  console.log("taxRequired:", taxRequired)
   const { children, onChangeMax } = props
   const { onPost, redirectAfterTx, queryKeys } = props
 
@@ -110,18 +110,21 @@ function Tx<TxValues>(props: Props<TxValues>) {
   const taxes = taxRequired
     ? calcTaxes(
         coins ?? ([{ input: 0, denom: initialGasDenom }] as CoinInput[]),
-        taxParams
+        taxParams,
+        isClassic
       )
     : undefined
-  const shouldTax = useShouldTax(token) && taxRequired
-  console.log('shouldTax', shouldTax, 'taxRequired:', taxRequired)
+  const shouldTax = useShouldTax(token, isClassic) && taxRequired
+  console.log("shouldTax", shouldTax, "taxRequired:", taxRequired)
   const { data: rate = "0", ...taxRateState } = useTaxRate(!shouldTax)
   const { data: cap = "0", ...taxCapState } = useTaxCap(token)
   const taxState = combineState(taxRateState, taxCapState)
 
   /* simulation: estimate gas */
   const simulationTx = estimationTxValues && createTx(estimationTxValues)
-  const gasAdjustmentSetting = isClassic ? SettingKey.ClassicGasAdjustment : SettingKey.GasAdjustment
+  const gasAdjustmentSetting = isClassic
+    ? SettingKey.ClassicGasAdjustment
+    : SettingKey.GasAdjustment
   const gasAdjustment = getLocalSetting<number>(gasAdjustmentSetting)
   const key = {
     address,

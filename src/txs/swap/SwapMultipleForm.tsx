@@ -168,6 +168,7 @@ const SwapMultipleForm = () => {
     estimationTxValues,
     createTx,
     coins,
+    taxRequired: true,
     excludeGasDenom,
     onSuccess: { label: t("Wallet"), path: "/wallet" },
   }
