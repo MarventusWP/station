@@ -155,7 +155,7 @@ const SwapMultipleForm = () => {
     return {
       input: toInput(amount),
       denom: offerAsset,
-      taxRequired: isClassic && has(tax),
+      taxRequired: isClassic && tax && new BigNumber(tax).gt(0),
     } as CoinInput
   })
   const excludeGasDenom = useCallback(
