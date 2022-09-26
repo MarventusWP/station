@@ -37,13 +37,14 @@ export interface TaxParams {
 
 export const calcTaxes = (
   coins: CoinInput[],
-  { taxRate, taxCaps }: TaxParams
+  { taxRate, taxCaps }: TaxParams,
+  isClassic: boolean
 ) => {
   return new Coins(
     coins
       .filter(({ input, denom, taxRequired }) => {
         const amount = toAmount(input)
-        return useShouldTax(denom) && has(amount) && taxRequired
+        return useShouldTax(denom, isClassic) && has(amount) && taxRequired
       })
       .map(({ input, denom, taxRequired }) => {
         const amount = toAmount(input)

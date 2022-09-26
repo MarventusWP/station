@@ -155,7 +155,7 @@ const SwapMultipleForm = () => {
     return {
       input: toInput(amount),
       denom: offerAsset,
-      taxRequired: isClassic && tax,
+      taxRequired: isClassic && tax && new BigNumber(tax).gt(0),
     } as CoinInput
   })
   const excludeGasDenom = useCallback(
@@ -168,6 +168,7 @@ const SwapMultipleForm = () => {
     estimationTxValues,
     createTx,
     coins,
+    taxRequired: true,
     excludeGasDenom,
     onSuccess: { label: t("Wallet"), path: "/wallet" },
   }
